@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { HeroFigure } from "@/components/hero-figure";
+import { TrendFigure } from "@/components/trend-figure";
 import { ArrowRight, Download, GitHub, LinkedIn, Mail, Phone } from "@/components/icons";
 import { ProjectCard } from "@/components/project-card";
 import {
@@ -115,16 +115,22 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="reveal reveal-4 lg:pl-4">
-            <HeroFigure />
-            <p className="mt-3 text-xs leading-relaxed text-muted">
-              Real figures from {fmtInt(roadSafety.totalCrashes)} police-recorded injury crashes in
-              Israel, 2020–2024 (CBS public data).{" "}
-              <Link href="/analytics" className="font-medium text-accent-ink underline underline-offset-4">
-                Open the interactive analysis
-              </Link>
-              .
-            </p>
+          <div className="reveal reveal-4 lg:pl-8">
+            <div className="relative mx-auto max-w-[22rem] lg:max-w-none">
+              <div
+                aria-hidden
+                className="absolute -inset-3 -z-10 rounded-[1.75rem] opacity-60 blur-2xl"
+                style={{ background: "var(--accent-glow)" }}
+              />
+              <Image
+                src={portrait}
+                alt={`${profile.name}, ${profile.role}`}
+                placeholder="blur"
+                priority
+                sizes="(min-width: 1024px) 420px, (min-width: 640px) 60vw, 80vw"
+                className="h-auto w-full rounded-2xl border border-line object-cover shadow-[var(--shadow-lift)]"
+              />
+            </div>
           </div>
         </div>
 
@@ -178,16 +184,6 @@ export default function Home() {
           </div>
 
           <div className="space-y-4">
-            <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-[var(--shadow-card)]">
-              <Image
-                src={portrait}
-                alt={`${profile.name}, ${profile.role}`}
-                placeholder="blur"
-                priority={false}
-                sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
-                className="h-auto w-full object-cover"
-              />
-            </div>
             <FactList
               items={[
                 { term: "Based in", value: profile.location },
@@ -279,28 +275,43 @@ export default function Home() {
               </SecondaryLink>
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <StatTile
-              label="Crashes analysed"
-              value={fmtInt(roadSafety.totalCrashes)}
-              detail="Every police-recorded injury crash in Israel, 2020–2024."
-            />
-            <StatTile
-              label="Fatal crashes"
-              value={`+${Math.round(roadSafety.changePct.fatal)}%`}
-              detail={`While the reported total fell ${Math.abs(Math.round(roadSafety.changePct.injury_crashes))}%.`}
-            />
-            <StatTile
-              label="Severity model"
-              value={`AUC ${roadSafety.cvAuc.toFixed(2)}`}
-              detail="Cross-validated by holding out whole years."
-            />
-            <StatTile
-              label="Ranking by raw counts"
-              value="+47%"
-              detail="How much a top-20 list over-promises, before correcting for luck."
-            />
+          <div>
+            <TrendFigure />
+            <p className="mt-3 text-xs leading-relaxed text-muted">
+              {fmtInt(roadSafety.totalCrashes)} police-recorded injury crashes, Central Bureau of
+              Statistics, 2020–2024.{" "}
+              <Link
+                href="/analytics"
+                className="font-medium text-accent-ink underline underline-offset-4"
+              >
+                The full analysis is interactive
+              </Link>
+              .
+            </p>
           </div>
+        </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <StatTile
+            label="Crashes analysed"
+            value={fmtInt(roadSafety.totalCrashes)}
+            detail="Every police-recorded injury crash in Israel, 2020–2024."
+          />
+          <StatTile
+            label="Fatal crashes"
+            value={`+${Math.round(roadSafety.changePct.fatal)}%`}
+            detail={`While the reported total fell ${Math.abs(Math.round(roadSafety.changePct.injury_crashes))}%.`}
+          />
+          <StatTile
+            label="Severity model"
+            value={`AUC ${roadSafety.cvAuc.toFixed(2)}`}
+            detail="Cross-validated by holding out whole years."
+          />
+          <StatTile
+            label="Ranking by raw counts"
+            value="+47%"
+            detail="How much a top-20 list over-promises, before correcting for luck."
+          />
         </div>
       </Section>
 

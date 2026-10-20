@@ -3,10 +3,11 @@ import { r2 } from "@/lib/number-format";
 
 /**
  * The chart that started the road-safety project: the reported crash count and
- * the death count, indexed to 2020. Static by design — it is an illustration of
- * a real finding, and the interactive version lives on the showcase page.
+ * the death count, indexed to 2020. Static by design — it illustrates the
+ * finding the showcase section introduces; the interactive version is on
+ * /analytics.
  */
-export function HeroFigure() {
+export function TrendFigure() {
   const years = roadSafety.byYear.map((y) => y.year);
   const base = roadSafety.byYear[0];
   const injury = roadSafety.byYear.map((y) => (y.injury / base.injury) * 100);
