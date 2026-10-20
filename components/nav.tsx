@@ -41,7 +41,7 @@ export function Nav() {
           >
             YB
           </span>
-          <span className="hidden sm:inline">{profile.name}</span>
+          <span className="hidden whitespace-nowrap lg:inline">{profile.name}</span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
