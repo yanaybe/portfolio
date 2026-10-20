@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Every colour in the site is a token, and the dark values are
+   chosen for the dark surface rather than flipped from the light ones.
+   The chart series tokens are the validated data-viz palette, checked against
+   these exact surfaces (#f8fafc light, #0f172a dark) for lightness band,
+   chroma, colour-vision separation and contrast.
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --bg-tint: #f6f8fc;
+  --surface: #f8fafc;
+  --surface-2: #f1f5f9;
+  --surface-raised: #ffffff;
+
+  --ink: #0b1220;
+  --ink-2: #334155;
+  --muted: #5b6a80;
+
+  /* Code tokens are separate from the chart series: series hues are tuned for
+     marks on a surface, and several of them fail text contrast at code sizes. */
+  --code-string: #0f766e;
+  --code-number: #9a3412;
+
+  --line: rgba(15, 23, 42, 0.1);
+  --line-strong: rgba(15, 23, 42, 0.18);
+
+  --accent: #1d4ed8;
+  --accent-ink: #1e40af;
+  --accent-soft: rgba(29, 78, 216, 0.08);
+  --accent-glow: rgba(29, 78, 216, 0.14);
+
+  --good: #0ca30c;
+  --critical: #d03b3b;
+
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --grid: rgba(15, 23, 42, 0.08);
+  --baseline: rgba(15, 23, 42, 0.2);
+
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -12px rgba(15, 23, 42, 0.12);
+  --shadow-lift: 0 2px 4px rgba(15, 23, 42, 0.05), 0 18px 40px -18px rgba(15, 23, 42, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #070b14;
+    --bg-tint: #0a1020;
+    --surface: #0f172a;
+    --surface-2: #16203a;
+    --surface-raised: #121c33;
+
+    --ink: #e9eefb;
+    --ink-2: #aebbd4;
+    --muted: #8498b8;
+
+    --code-string: #5eead4;
+    --code-number: #fdba74;
+
+    --line: rgba(255, 255, 255, 0.1);
+    --line-strong: rgba(255, 255, 255, 0.2);
+
+    --accent: #5b9bff;
+    --accent-ink: #9cc4ff;
+    --accent-soft: rgba(91, 155, 255, 0.12);
+    --accent-glow: rgba(91, 155, 255, 0.18);
+
+    --good: #0ca30c;
+    --critical: #e06a6a;
+
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --grid: rgba(255, 255, 255, 0.08);
+    --baseline: rgba(255, 255, 255, 0.22);
+
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+    --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.45), 0 18px 40px -18px rgba(0, 0, 0, 0.7);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #070b14;
+  --bg-tint: #0a1020;
+  --surface: #0f172a;
+  --surface-2: #16203a;
+  --surface-raised: #121c33;
+
+  --ink: #e9eefb;
+  --ink-2: #aebbd4;
+  --muted: #8498b8;
+
+  --code-string: #5eead4;
+  --code-number: #fdba74;
+
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.2);
+
+  --accent: #5b9bff;
+  --accent-ink: #9cc4ff;
+  --accent-soft: rgba(91, 155, 255, 0.12);
+  --accent-glow: rgba(91, 155, 255, 0.18);
+
+  --good: #0ca30c;
+  --critical: #e06a6a;
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --grid: rgba(255, 255, 255, 0.08);
+  --baseline: rgba(255, 255, 255, 0.22);
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.45), 0 18px 40px -18px rgba(0, 0, 0, 0.7);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-tint: var(--bg-tint);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-raised: var(--surface-raised);
+
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-code-string: var(--code-string);
+  --color-code-number: var(--code-number);
+
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-good: var(--good);
+  --color-critical: var(--critical);
+
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --color-series-3: var(--series-3);
+  --color-series-4: var(--series-4);
+  --color-grid: var(--grid);
+  --color-baseline: var(--baseline);
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-mono-code), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings get optical sizing and tight tracking; body text stays comfortable. */
+h1, h2, h3, h4 {
+  letter-spacing: -0.021em;
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Anything that animates does so only when the reader allows motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .reveal-1 { animation-delay: 0.05s; }
+  .reveal-2 { animation-delay: 0.1s; }
+  .reveal-3 { animation-delay: 0.15s; }
+  .reveal-4 { animation-delay: 0.2s; }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.hairline-top {
+  background-image: linear-gradient(90deg, transparent, var(--line-strong) 20%, var(--line-strong) 80%, transparent);
+  height: 1px;
+}
+
+.grid-field {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* Narrow scrollbars inside code and table panes. */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+.thin-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 99px; }
+
+.tnum { font-variant-numeric: tabular-nums; }
