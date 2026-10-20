@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { HeroFigure } from "@/components/hero-figure";
 import { ArrowRight, Download, GitHub, LinkedIn, Mail, Phone } from "@/components/icons";
@@ -17,6 +18,7 @@ import { education, experience, languages, recognition, skillGroups } from "@/li
 import { roadSafety } from "@/lib/data/road-safety";
 import { featuredProjects } from "@/lib/projects";
 import { profile, resumes } from "@/lib/site";
+import portrait from "@/public/images/yanay-berdah.jpg";
 import { fmtInt } from "@/lib/format";
 
 const heroStats = [
@@ -176,6 +178,16 @@ export default function Home() {
           </div>
 
           <div className="space-y-4">
+            <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-[var(--shadow-card)]">
+              <Image
+                src={portrait}
+                alt={`${profile.name}, ${profile.role}`}
+                placeholder="blur"
+                priority={false}
+                sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+                className="h-auto w-full object-cover"
+              />
+            </div>
             <FactList
               items={[
                 { term: "Based in", value: profile.location },

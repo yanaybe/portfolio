@@ -160,9 +160,10 @@ export const education = [
     detail: "The unit's analyst training track.",
   },
   {
-    title: "Computer science and physics",
-    org: "Secondary education, Israel",
-    detail: "10-unit computer science and 5-unit physics matriculation tracks.",
+    title: "Amit Bar Ilan High School",
+    org: "2016 – 2022",
+    detail:
+      "Computer science and physics: 10-unit computer science and 5-unit physics matriculation tracks.",
   },
 ];
 
