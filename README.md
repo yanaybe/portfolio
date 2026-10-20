@@ -104,7 +104,8 @@ components/
                               CI dot plot, heatmap, chart frame (legend,
                               table view, tooltip)
   showcase/                   the two charts with interactive controls
-  nav, footer, project-card, case-study, code-block, ui, icons, theme-toggle
+  nav, footer, project-card, case-study, code-block, trend-figure, ui,
+                              icons, theme-toggle
 lib/
   site.ts        identity, contact details, resume files
   projects.ts    project registry (cards, case-study headers, sitemap)
