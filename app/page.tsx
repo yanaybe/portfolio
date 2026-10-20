@@ -134,7 +134,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="mx-auto max-w-6xl px-5 pb-20 sm:px-8 sm:pb-28">
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-4">
             {heroStats.map((stat) => (
               <div key={stat.label} className="bg-surface p-5">
